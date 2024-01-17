@@ -1,0 +1,2 @@
+-- Insertar Usuarios
+insert into usuarios(usuario, contrasena, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, fecha_ingreso, tipo_puesto) values("supervisor", "12345", "Oswaldo Daniel", "Cruz", "Cruz", "1999-06-07", "2024-01-16", "SUPERVISOR");
