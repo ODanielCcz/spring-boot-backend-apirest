@@ -29,6 +29,11 @@ public class ClienteRestController {
         this.clienteService = clienteService;
     }
 
+    @GetMapping("/clientes")
+    public List<Cliente> index() {
+        return this.clienteService.findAllClientes();
+    }
+
     @GetMapping("/clientes/page/{page}")
     public Page<Cliente> index(@PathVariable Integer page) {
         return this.clienteService.findAll(PageRequest.of(page, 5));
