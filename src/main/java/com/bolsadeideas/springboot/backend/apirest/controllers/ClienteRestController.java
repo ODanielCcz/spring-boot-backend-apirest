@@ -31,7 +31,7 @@ public class ClienteRestController {
 
     @GetMapping("/clientes")
     public List<Cliente> index() {
-        return this.clienteService.findAllClientes();
+        return clienteService.findAll();
     }
 
     @GetMapping("/clientes/page/{page}")
@@ -58,6 +58,12 @@ public class ClienteRestController {
         }
 
         return new ResponseEntity<>(cliente, HttpStatus.OK);
+    }
+
+    @GetMapping("/clientes/filtrar-clientes/{term}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Cliente> filtrarClientes(@PathVariable String term) {
+        return this.clienteService.findClienteByNombre(term.toLowerCase());
     }
 
     @PostMapping("clientes")

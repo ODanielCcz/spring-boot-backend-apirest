@@ -4,6 +4,7 @@ import com.bolsadeideas.springboot.backend.apirest.models.dao.IClienteDao;
 import com.bolsadeideas.springboot.backend.apirest.models.dao.ICreditoDao;
 import com.bolsadeideas.springboot.backend.apirest.models.entity.Cliente;
 import com.bolsadeideas.springboot.backend.apirest.models.entity.Credito;
+import com.bolsadeideas.springboot.backend.apirest.models.entity.Usuario;
 import com.bolsadeideas.springboot.backend.apirest.service.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +28,7 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Cliente> findAllClientes() {
+    public List<Cliente> findAll() {
         return this.clienteDao.findAll();
     }
 
@@ -45,6 +46,12 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     @Transactional
+    public List<Cliente> findClienteByNombre(String term) {
+        return clienteDao.findByNombre(term);
+    }
+
+    @Override
+    @Transactional
     public Cliente save(Cliente cliente) {
         return this.clienteDao.save(cliente);
     }
@@ -53,6 +60,12 @@ public class ClienteServiceImpl implements IClienteService {
     @Override
     public Page<Credito> findAllCreditos(Pageable pageable) {
         return this.creditoDao.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Usuario> findAllUsuarios() {
+        return this.creditoDao.findAllUsuarios();
     }
 
     @Override

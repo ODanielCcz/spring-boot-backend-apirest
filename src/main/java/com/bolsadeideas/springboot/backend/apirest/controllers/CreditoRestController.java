@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.backend.apirest.controllers;
 
 import com.bolsadeideas.springboot.backend.apirest.models.entity.Credito;
+import com.bolsadeideas.springboot.backend.apirest.models.entity.Usuario;
 import com.bolsadeideas.springboot.backend.apirest.service.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -114,6 +115,11 @@ public class CreditoRestController {
         response.put("mensaje", "El credito ha sido actualizado con éxito!");
         response.put("data", creditoUpdated);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/creditos/usuarios")
+    public List<Usuario> listarUsuarios() {
+        return this.clienteService.findAllUsuarios();
     }
 
     private ResponseEntity<Map<String, Object>> responseEntity(Map<String, Object> response, BindingResult result) {
