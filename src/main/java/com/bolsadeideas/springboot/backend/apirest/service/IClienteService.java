@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface IClienteService {
 
+    List<Cliente> findAllClientes();
+
     Page<Cliente> findAll(Pageable pageable);
 
     Cliente findById(Long id);
