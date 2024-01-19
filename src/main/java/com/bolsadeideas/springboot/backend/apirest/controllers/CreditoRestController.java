@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,16 +32,13 @@ public class CreditoRestController {
         this.clienteService = clienteService;
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @GetMapping("/creditos")
     public List<Credito> index() {
         return this.clienteService.findAllCreditos();
     }
 
-    @GetMapping("/creditos/page/{page}")
-    public Page<Credito> index (@PathVariable Integer page) {
-        return this.clienteService.findAllCreditos(PageRequest.of(page, 5));
-    }
-
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @GetMapping("/creditos/{id}")
     public ResponseEntity<?> show(@PathVariable Long id) {
         Credito credito;
@@ -62,6 +60,7 @@ public class CreditoRestController {
         return new ResponseEntity<>(credito, HttpStatus.OK);
     }
 
+    @Secured({"ROLE_USER"})
     @PostMapping("/creditos")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@Valid @RequestBody Credito credito, BindingResult result) {
@@ -85,6 +84,7 @@ public class CreditoRestController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @Secured({"ROLE_ADMIN"})
     @PutMapping("/creditos/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> update(@Valid @RequestBody Credito credito, BindingResult result, @PathVariable Long id) {
@@ -122,6 +122,7 @@ public class CreditoRestController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @GetMapping("/creditos/usuarios")
     public List<Usuario> listarUsuarios() {
         return this.clienteService.findAllUsuarios();

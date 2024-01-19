@@ -8,6 +8,6 @@ public interface IUsuarioService {
 
     List<Usuario> findAll();
 
-    Usuario findById(Long id);
+    public Usuario findByUsername(String username);
 
 }

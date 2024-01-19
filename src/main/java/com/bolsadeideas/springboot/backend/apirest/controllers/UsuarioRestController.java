@@ -3,6 +3,7 @@ package com.bolsadeideas.springboot.backend.apirest.controllers;
 import com.bolsadeideas.springboot.backend.apirest.models.entity.Usuario;
 import com.bolsadeideas.springboot.backend.apirest.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,16 +23,10 @@ public class UsuarioRestController {
         this.usuarioService = usuarioService;
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @GetMapping("/usuarios")
     public List<Usuario> index() {
         return this.usuarioService.findAll();
     }
-
-    /*
-    @GetMapping("/clientes")
-    public List<Cliente> index() {
-        return clienteService.findAll();
-    }
-     */
 
 }

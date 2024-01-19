@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,16 +30,13 @@ public class ClienteRestController {
         this.clienteService = clienteService;
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @GetMapping("/clientes")
     public List<Cliente> index() {
         return clienteService.findAll();
     }
 
-    @GetMapping("/clientes/page/{page}")
-    public Page<Cliente> index(@PathVariable Integer page) {
-        return this.clienteService.findAll(PageRequest.of(page, 5));
-    }
-
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @GetMapping("/clientes/{id}")
     public ResponseEntity<?> show(@PathVariable Long id) {
         Cliente cliente;
@@ -60,12 +58,7 @@ public class ClienteRestController {
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
-    @GetMapping("/clientes/filtrar-clientes/{term}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public List<Cliente> filtrarClientes(@PathVariable String term) {
-        return this.clienteService.findClienteByNombre(term.toLowerCase());
-    }
-
+    @Secured({"ROLE_USER"})
     @PostMapping("clientes")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) {

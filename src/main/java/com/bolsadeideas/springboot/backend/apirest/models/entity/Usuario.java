@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
@@ -20,11 +21,13 @@ public class Usuario implements Serializable {
     @NotEmpty(message = "no puede estar vacío")
     @Size(min = 4, max = 10, message = "el tamaño tiene que estar entre 4 y 10 caracteres.")
     @Column(nullable = false, unique = true, length = 10)
-    private String usuario;
+    private String username;
 
     @NotEmpty(message = "no puede estar vacío")
     @Column(nullable = false, length = 60)
-    private String contrasena;
+    private String password;
+
+    private Boolean enabled;
 
     @NotEmpty(message = "no puede estar vacío")
     @Size(min = 4, max = 30, message = "el tamaño tiene que estar entre 4 y 30 caracteres.")
@@ -53,6 +56,12 @@ public class Usuario implements Serializable {
     @Column(insertable = false, updatable = false , name = "tipo_puesto")
     private Puesto puesto;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id", "rol_id"})})
+    private List<Rol> roles;
+
     public Long getId() {
         return id;
     }
@@ -61,20 +70,20 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getNombre() {
@@ -124,4 +133,21 @@ public class Usuario implements Serializable {
     public void setPuesto(Puesto puesto) {
         this.puesto = puesto;
     }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
 }
