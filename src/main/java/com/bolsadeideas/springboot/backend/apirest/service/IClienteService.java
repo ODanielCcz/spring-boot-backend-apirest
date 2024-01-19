@@ -22,6 +22,8 @@ public interface IClienteService {
 
     Page<Credito> findAllCreditos(Pageable pageable);
 
+    List<Credito> findAllCreditos();
+
     List<Usuario> findAllUsuarios();
 
     Credito findCreditoById(Long id);

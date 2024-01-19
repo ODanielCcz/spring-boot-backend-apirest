@@ -56,6 +56,11 @@ public class ClienteServiceImpl implements IClienteService {
         return this.clienteDao.save(cliente);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<Credito> findAllCreditos() {
+        return this.creditoDao.findAll();
+    }
 
     @Override
     public Page<Credito> findAllCreditos(Pageable pageable) {

@@ -31,6 +31,11 @@ public class CreditoRestController {
         this.clienteService = clienteService;
     }
 
+    @GetMapping("/creditos")
+    public List<Credito> index() {
+        return this.clienteService.findAllCreditos();
+    }
+
     @GetMapping("/creditos/page/{page}")
     public Page<Credito> index (@PathVariable Integer page) {
         return this.clienteService.findAllCreditos(PageRequest.of(page, 5));
