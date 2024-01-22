@@ -3,6 +3,9 @@
 
 insert into usuarios(username, password, enabled, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, fecha_ingreso, tipo_puesto) values('CAPTURISTA', '$2a$10$lJIFNWI2NYXFifKcPEliL.Lhu.KjvqOPmMuPLAXHtOtWITQbiFDdC', 1, 'Itzel Damayanti', 'Partida', 'Arroyo', '1995-07-18', '2024-01-16', 'CAPTURISTA');
 
+insert into usuarios(nombre, apellido_paterno, apellido_materno, fecha_nacimiento, fecha_ingreso, tipo_puesto) values('Mica', 'Ramos', 'Reyes', '1995-07-18', '2024-01-16', 'ASESOR');
+
+
 INSERT INTO roles(nombre) VALUES('ROLE_ADMIN');
 INSERT INTO roles(nombre) VALUES('ROLE_USER');
 

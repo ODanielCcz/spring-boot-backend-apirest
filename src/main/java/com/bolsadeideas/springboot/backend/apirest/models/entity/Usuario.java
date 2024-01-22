@@ -18,13 +18,11 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "no puede estar vacío")
     @Size(min = 4, max = 10, message = "el tamaño tiene que estar entre 4 y 10 caracteres.")
-    @Column(nullable = false, unique = true, length = 10)
+    @Column(unique = true, length = 10)
     private String username;
 
-    @NotEmpty(message = "no puede estar vacío")
-    @Column(nullable = false, length = 60)
+    @Column(length = 60)
     private String password;
 
     private Boolean enabled;
